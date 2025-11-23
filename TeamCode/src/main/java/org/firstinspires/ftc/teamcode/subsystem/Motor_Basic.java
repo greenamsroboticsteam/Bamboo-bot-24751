@@ -2,15 +2,17 @@ package org.firstinspires.ftc.teamcode.subsystem;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Motor_Basic {
     private DcMotor motor;
     private Telemetry telemetry;
-    private final double power = 0.5; //tuy chinh
+    private double power = 0.5; //tuy chinh
 
     public void init(HardwareMap hwmap, Telemetry telemetry) {
         this.motor = hardwareMap.get(DcMotor.class, "flywheel");//remember to change motor's name
@@ -21,8 +23,14 @@ public class Motor_Basic {
 
         this.motor.setPower(power);
     }
+
     public void setPower(boolean increase, boolean decrease) {
         this.motor.setPower(power);
+    }
+    public void setPower(double power) {
+        this.power = power;
+        this.power = Range.clip(this.power, 0.0, 1.0);
+        this.motor.setPower(this.power);
     }
     public double getPower() {
         return this.power;
@@ -37,3 +45,4 @@ public class Motor_Basic {
         }
     }
 }
+
