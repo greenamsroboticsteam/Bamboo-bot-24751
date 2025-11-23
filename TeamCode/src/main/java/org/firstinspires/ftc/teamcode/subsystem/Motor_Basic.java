@@ -15,7 +15,7 @@ public class Motor_Basic {
     public void init(HardwareMap hwmap, Telemetry telemetry) {
         this.motor = hardwareMap.get(DcMotor.class, "flywheel");//remember to change motor's name
         this.motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         this.motor.setDirection(DcMotor.Direction.REVERSE);
         this.telemetry = telemetry;
 
