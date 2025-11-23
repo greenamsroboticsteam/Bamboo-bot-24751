@@ -7,17 +7,19 @@ import org.firstinspires.ftc.teamcode.subsystem.Motor_Basic;
 @TeleOp(name = "Motor Test")
 public class Motor_Test extends OpMode {
     Motor_Basic motor;
+    private final double CONSTANT_VELOCITY = 0.5;
 
     @Override
     public void init() {
+        this.motor = new Motor_Basic();
         this.motor.init(this.hardwareMap, this.telemetry);
-        telemetry.addData("state", "init");
-        telemetry.update();
+        this.telemetry.addData("state", "init");
+        this.telemetry.update();
     }
 
     @Override
     public void loop() {
-        this.motor.setPower(gamepad1.dpad_up, gamepad1.dpad_down);
+        this.motor.setPower(CONSTANT_VELOCITY);
         this.motor.periodic();
         this.telemetry.update();
     }
@@ -26,3 +28,5 @@ public class Motor_Test extends OpMode {
         this.motor.stop();
     }
 }
+
+
