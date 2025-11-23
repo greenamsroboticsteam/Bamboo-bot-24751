@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Servo_Basic {
@@ -12,10 +14,11 @@ public class Servo_Basic {
 
     public void init(HardwareMap hwMap, Telemetry telemetry) {
         this.servo = hwMap.get(Servo.class, "servo");//remember to change servo's name
-
         this.telemetry = telemetry;
 
-        this.position = 0.5; //bắt đầu ở vị trí 0
+    }
+    public void start() {
+        this.position = 0.5;
         this.servo.setPosition(this.position);
     }
 
@@ -27,11 +30,15 @@ public class Servo_Basic {
             this.position -= HOOD_INCREMENT;
         }
 
-        this.position = Math.max(0.0, Math.min(1.0, this.position));
-
+        this.position = Range.clip(this.position, 0.0, 1.0);
         this.servo.setPosition(this.position);
     }
 
+    public void setPosition(double position) {
+        this.position = position;
+        this.position = Range.clip(this.position, 0.0, 1.0);
+        this.servo.setPosition(this.position);
+    }
 
     public void periodic() {
         if (telemetry != null) {
@@ -40,10 +47,11 @@ public class Servo_Basic {
         }
     }
     public double getAngle() {
-        return this.servo.getPosition() * 300.0; // 300.0 là góc quay tối đa của servo goBilda
+        return this.servo.getPosition() * 300.0;
     }
 
     public double getNormalizedPosition() {
         return this.position;
     }
 }
+
