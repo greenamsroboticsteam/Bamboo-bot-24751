@@ -1,37 +1,36 @@
 package org.firstinspires.ftc.teamcode.Starter_Opmode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-@TeleOp(name = "AutoOp")
-public class AutoOp extends OpMode {
+@Autonomous(name = "AutoOp")
+public class AutoOp extends LinearOpMode {
     private DcMotor leftMotor, rightMotor;
-    private Telemetry telemetry;
     private static final double TICKS_PER_MOTOR_REV = 537.7; // Ví dụ cho motor goBILDA 5203 series
     private static final double DRIVE_GEAR_REDUCTION = 1.0;   // Không có hộp số phụ
     private static final double WHEEL_DIAMETER_METERS = 0.096; //nên tự đo thông số này
-
-
     @Override
-    public void init() {
+    public void runOpMode() {
         this.leftMotor = hardwareMap.get(DcMotor.class, "left_motor");
         this.rightMotor = hardwareMap.get(DcMotor.class, "right_motor");
 
         this.leftMotor.setDirection(DcMotor.Direction.FORWARD);
         this.rightMotor.setDirection(DcMotor.Direction.REVERSE); //change during test
 
+        this.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         this.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        this.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        this.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }
+        telemetry.addData(">", "Robot is initialized and ready.");
+        telemetry.addData(">", "Press Play to start.");
+        telemetry.update();
+        waitForStart();
+        if(isStopRequested()) return;
 
-    @Override
-    public void loop() {
-        drive(0.5, 2.0);
+        if(opModeIsActive())
+            drive(0.5, 1.0);
     }
 
     public void drive(double power, double distance) {
@@ -43,15 +42,19 @@ public class AutoOp extends OpMode {
         this.leftMotor.setPower(power);
         this.rightMotor.setPower(power);
 
-        this.telemetry.addData("Status", "Running to position");
-        this.telemetry.addData("Target Postion", distance);
-        this.telemetry.addData("Left Motor", "At %distance", this.leftMotor.getCurrentPosition());
-        this.telemetry.addData("Right Motor", "At %distance", this.rightMotor.getCurrentPosition());
-        this.telemetry.update();
+        while(opModeIsActive() && this.leftMotor.isBusy() && this.rightMotor.isBusy()) {
+            this.telemetry.addData("Status", "Running to position");
+            this.telemetry.addData("Target Postion", distance);
+            this.telemetry.addData("Left Motor", "At %distance", this.leftMotor.getCurrentPosition());
+            this.telemetry.addData("Right Motor", "At %distance", this.rightMotor.getCurrentPosition());
+            this.telemetry.update();
+            idle();
+        }
 
         this.leftMotor.setPower(0.0);
         this.rightMotor.setPower(0.0);
         
-
+        this.leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        this.rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
