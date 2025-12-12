@@ -6,22 +6,23 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.subsystem.Drivebase;
 import org.firstinspires.ftc.teamcode.subsystem.Drivebase_2;
 import org.firstinspires.ftc.teamcode.subsystem.Flywheel;
+import org.firstinspires.ftc.teamcode.subsystem.Motor_Basic;
 import org.firstinspires.ftc.teamcode.subsystem.Servo_Basic;
 
 @TeleOp(name="TeleopTest")
 public class TeleopTest extends OpMode {
     Drivebase_2 drivebase;
     Flywheel flywheel;
-    Servo_Basic servoBasic;
+    Motor_Basic intake;
+    Motor_Basic Runningup;
+    Servo_Basic servo_sorter;
     private boolean flywheelIncreaseWasPressed = false;
     private boolean flywheelDecreaseWasPressed = false;
     private boolean isFlywheelIncreaseIsPressed;
     private boolean isFlywheelDecreaseIsPressed;
-
-    private boolean HoodIncreaseWasPressed = false;
-    private boolean HoodDecreaseWasPressed = false;
-    private boolean HoodIncreaseIsPressed;
-    private boolean HoodDecreaseIsPressed;
+    private boolean IntakeIsPressed = gamepad1.left_bumper;
+    private boolean RunningupIsPressed = gamepad1.right_bumper;
+    private boolean SorterIsPressed = gamepad1.a;
 
 
     @Override
@@ -30,18 +31,29 @@ public class TeleopTest extends OpMode {
         this.drivebase.init(this.hardwareMap, this.telemetry);
 
         this.flywheel = new Flywheel();
-        this.flywheel.init(this.hardwareMap, this.telemetry);
+        this.flywheel.init(this.hardwareMap, this.telemetry, "flywheel");
 
-        this.servoBasic = new Servo_Basic();
-        this.servoBasic.init(this.hardwareMap, this.telemetry);
+        this.intake = new Motor_Basic();
+        this.intake.init(this.hardwareMap, this.telemetry, "intake");
+
+        this.Runningup = new Motor_Basic();
+        this.Runningup.init(this.hardwareMap, this.telemetry, "Runningup");
+
+        this.servo_sorter = new Servo_Basic();
+        this.servo_sorter.init(this.hardwareMap, this.telemetry, "servo_sorter");
 
         this.telemetry.addData("state", "init");
         this.telemetry.update();
     }
     @Override
     public void start() {
+        this.servo_sorter.start();
+        this.intake.start();
+        this.Runningup.start();
         this.flywheel.start();
-        this.servoBasic.start();
+
+        this.telemetry.addData("state", "start");
+        this.telemetry.update();
     }
     @Override
     public void loop() {
@@ -57,34 +69,28 @@ public class TeleopTest extends OpMode {
         if(this.isFlywheelDecreaseIsPressed && !this.flywheelDecreaseWasPressed) {
             FlywheelFutureDecrease = true;
         }
-        this.HoodDecreaseIsPressed = this.gamepad1.b;
-        this.HoodIncreaseIsPressed = this.gamepad1.a;
+        if(this.IntakeIsPressed) this.intake.setPower(1.0);
 
-        boolean HoodFutureIncrease = false;
-        boolean HoodFutureDecrease = false;
+        if(this.RunningupIsPressed) this.Runningup.setPower(1.0);
 
-        if (this.HoodIncreaseIsPressed && !this.HoodIncreaseWasPressed) {
-            HoodFutureIncrease = true;
-        } else if(this.HoodDecreaseIsPressed && !this.HoodDecreaseWasPressed) {
-            HoodFutureDecrease = true;
-        }
+        if(this.SorterIsPressed) this.servo_sorter.setPosition(1.0);
+        else this.servo_sorter.setPosition(0.0);
 
         this.flywheelIncreaseWasPressed = this.isFlywheelIncreaseIsPressed;
         this.flywheelDecreaseWasPressed = this.isFlywheelDecreaseIsPressed;
 
-        this.HoodIncreaseWasPressed = this.HoodIncreaseIsPressed;
-        this.HoodDecreaseWasPressed = this.HoodDecreaseIsPressed;
-
-        this.servoBasic.setPosition(HoodFutureIncrease, HoodFutureDecrease);
-
         this.drivebase.drive(this.gamepad1.left_stick_x, this.gamepad1.right_stick_y);
-        //this.drivebase.drive(this.gamepad1.left_stick_x, this.gamepad1.left_stick_y);
 
         this.flywheel.shoot(FlywheelFutureIncrease, FlywheelFutureDecrease);
 
-        this.drivebase.periodic();
+        this.telemetry.addLine("Status: Running");
+        this.telemetry.addLine("Increase flywheel power: D-Pad Up");
+        this.telemetry.addLine("Decrease flywheel power: D-Pad Down");
+        this.telemetry.addLine("Intake: Left Bumper");
+        this.telemetry.addLine("Runningup: Right Bumper");
+        this.telemetry.addLine("Sorter: A");
+
         this.flywheel.periodic();
-        this.servoBasic.periodic();
         this.telemetry.update();
     }
 
@@ -92,6 +98,8 @@ public class TeleopTest extends OpMode {
     public void stop() {
         this.drivebase.stop();
         this.flywheel.stop();
+        this.intake.stop();
+        this.Runningup.stop();
 
         this.telemetry.addData("state", "stop");
     }
