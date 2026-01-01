@@ -11,8 +11,8 @@ public class AutoOp extends LinearOpMode {
     private static final double WHEEL_DIAMETER_METERS = 0.096; //nên tự đo thông số này
     @Override
     public void runOpMode() {
-        this.leftMotor = hardwareMap.get(DcMotor.class, "left_motor");
-        this.rightMotor = hardwareMap.get(DcMotor.class, "right_motor");
+        this.leftMotor = hardwareMap.get(DcMotor.class, "leftMotor");
+        this.rightMotor = hardwareMap.get(DcMotor.class, "rightMotor");
 
         this.leftMotor.setDirection(DcMotor.Direction.FORWARD);
         this.rightMotor.setDirection(DcMotor.Direction.REVERSE); //change during test
