@@ -6,7 +6,7 @@
 ### 4.	Nạp code vào Control Hub của FTC
 ### 5.	Điều khiển robot
 
-<img src="image-2.png" width="500" />
+<img src="/images/images.jpg" width="500" />
 
 ## I.	TẢI HOẶC CLONE REPO TỪ GITHUB
 
@@ -15,7 +15,10 @@
 https://github.com/nguyendangminh-coder/DECODE---FTC-starter-robot-
 2.	Bấm nút Code (màu xanh lá) → Copy HTTPS URL. 
 3.	Mở Android Studio → Get from VCS.
-4.	Paste URL → Chọn thư mục lưu → Clone.  
+4.	Paste URL → Chọn thư mục lưu → Clone.
+
+<img src="/images/as-welcome.webp" width="500" />
+
 ________________________________________
 ### Cách 2 — Download ZIP
 1.	Trên repo → bấm Code → Download ZIP.
@@ -27,9 +30,7 @@ II. IMPORT DỰ ÁN FTC VÀO ANDROID STUDIO
 1.	Android Studio sẽ tự phát hiện Gradle và build.
 2.	Chờ Gradle “Sync” hoàn tất, việc này thường tốn khoảng 15 giây, trong lúc đó bạn không nên truy cập hay chỉnh sửa các file.
 3.	Kiểm tra cây thư mục xem có cấu trúc chuẩn FTC:
-TODO: thêm ảnh vị trí các file của Android Studio sau khi đã tinh gọn.
 4.	Code robot của bạn sẽ nằm trong:
-TODO: Thêm ảnh vị trí code starter bot.
 III.	Dùng Android Studio gắn dự án với Github. (không bắt buộc)
        1.  Vào File → Settings → Version Control → Git (nếu cần kiểm tra).  
 2.  Vào VCS → Enable Version Control Integration → Git.
@@ -65,13 +66,11 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 1.	Android Studio sẽ tự phát hiện Gradle và build.
 2.	Chờ Gradle “Sync” hoàn tất, việc này thường tốn khoảng 15 giây, trong lúc đó bạn không nên truy cập hay chỉnh sửa các file.
 3.	Kiểm tra cây thư mục xem có cấu trúc chuẩn FTC:
-TODO: thêm ảnh vị trí các file của Android Studio sau khi đã tinh gọn.
 4.	Code robot của bạn sẽ nằm trong:
-TODO: Thêm ảnh vị trí code starter bot.
 ## III.	Dùng Android Studio gắn dự án với Github. (không bắt buộc)
 1.  Vào File → Settings → Version Control → Git (nếu cần kiểm tra).  
 
-![alt text](image-4.png)
+![alt text](images/Screenshot 2025-12-07 104645.png)
 
 2.  Vào VCS → Enable Version Control Integration → Git.
 3.  Vào Git → Manage Remotes → paste URL GitHub của bạn.
