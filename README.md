@@ -195,5 +195,6 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 - Nhấn nút right_bumper để bật / tắt intake (ăn bóng), và nhấn giữ nút right_trigger để bật chế độ nhả bóng (xoay ngược intake).
 - Khi bạn muốn đẩy bóng lên flywheel, hãy tắt intake trước (bằng cách nhấn nút right_bumper) rồi nhấn giữ nút vuông ở bên trái tay cầm để vừa bật feed bóng và vừa mở block (chặn bóng).
 
+### Ngoài ra, trong phần thi Automatic của FTC, bạn chỉ sử dụng file code có tên AutoOp.java và bot sẽ tự chạy trên một đường nhất định.
                                    --- The end ---
 
