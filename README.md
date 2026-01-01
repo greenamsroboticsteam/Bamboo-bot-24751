@@ -70,13 +70,14 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 ## III.	Dùng Android Studio gắn dự án với Github. (không bắt buộc)
 1.  Vào File → Settings → Version Control → Git (nếu cần kiểm tra).  
 
-![alt text](images/Screenshot 2025-12-07 104645.png)
+<img src="/images/Screenshot 2025-12-07 104645.png" width="500" />
 
 2.  Vào VCS → Enable Version Control Integration → Git.
 3.  Vào Git → Manage Remotes → paste URL GitHub của bạn.
 4.  Commit & Push khi cần.  
 
-![alt text](image-6.png)
+<img src="/images/Screenshot 2025-12-07 105217.png" width="500" />
+
 
 ## IV. Thiết lập tên của robot trong Control Hub
 ### Để có thể chạy robot dựa trên code JAVA, bạn cần có Driver Station (Driver Hub) và Control Hub (có thể bổ sung Expansion Hub nếu cần). Sau đó hãy thực hiện các bước sau:
@@ -84,34 +85,54 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 1.  Đầu tiên, hãy đổi tên của Driver Station và Control Hub sao cho phù hợp với thể lệ giải đấu FTC (giả sử mã số của đội bạn là 24751 thì hãy để tên lần lượt là 24751-DS và 24751-RC), thể lệ cuộc thi chi tiết: https://ftc-resources.firstinspires.org/ftc/game/manual
 2.	Sau đó hãy chọn mạng cục bộ của Control Hub (sau khi đã kích hoạt control hub) và thay đổi mật khẩu (tên mạng thường là FTC - |mã số đội|)
 
-<img src = "image-9.png" width = "300">
-<img src = "image-8.png" width = "300">
+
+<img src="/images/Screenshot 2025-12-23 153333.png" width="300" />
+
+
+<img src="/images/Screenshot 2025-12-23 153350.png" width="300" />
+
    
 3.	Tiếp theo, hãy nhấn vào dấu “3 chấm” ở góc trên cùng bên phải và nhấn vào Configure Robot. 
 
-<img src = "image-10.png" width = "300">
-<img src = "image-11.png" width = "300">
+
+<img src="/images/Screenshot 2025-12-23 153411.png" width="300" />
+
+
+<img src="/images/Screenshot 2025-12-23 153427.png" width="300" />
+
   
 4.	Trong phần Configure Robot hãy nhấn vào nút “new”  rồi nhấn Control Hub Portal, trong này bạn sẽ thấy tất cả các loại subsytem mà Control Hub cung cấp.  
 
-<img src = "image-12.png" width = "400">
 
-<img src = "image-13.png" width = "400">
+<img src="/images/Screenshot 2025-12-23 154809.png" width="400" />
 
-<img src = "image-14.png" width = "400">
+
+
+<img src="/images/Screenshot 2025-12-23 152318.png" width="400" />
+
+
+
+<img src="/images/Screenshot 2025-12-23 152335.png" width="400" />
+
  
 5.	Tiếp theo, hãy chọn từng loại subsystem được sử dụng trong con bot của bạn (motor, servo, IMU,…), chọn đúng sản phẩm rồi cuối cùng hãy nhập tên của từng subsystem. Từng subsystem sẽ ứng với cổng có số tương tự trên Control Hub khi kết nối.
 
-<img src = "image-15.png" width = "400">
+
+<img src="/images/Screenshot 2025-12-23 152359.png" width="500" />
+
  
 ### Lưu ý: Hãy đặt tên dễ nhớ và thể hiện đúng chức năng của nó. Ngoài ra trong phần code hãy chỉnh sửa tên của từng subsystem sao cho trùng khớp với tên trong Driver Station.
 6.	Sau khi đã thực hiện xong các bước trên, hãy nhấn done và save để lưu lại dữ liệu trong Driver Station. Sau khi nhấn save bạn sẽ được yêu cầu nhập tên cho Configure của bạn, phần này bạn có thể đặt tên một cách tùy ý.  
 
-<img src = "image-16.png" width = "400">
+
+<img src="/images/Screenshot 2025-12-23 155150.png" width="500" />
+
 
 7.	Để có thể sử dụng phần Configure bạn đã làm phía trên, hãy nhấn vào nút activate dưới tên của nó. Còn nếu bạn muốn chỉnh sửa hãy nhấn vào nút edit và xóa ở nút Delete.
 
-<img src = "image-17.png" width = "400">
+
+<img src="/images/Screenshot 2025-12-23 155202.png" width="500" />
+
   
 8.	Sau khi nhấn Activate, bạn nhấn nút mũi tên hướng ra ngoài và bạn sẽ thấy dòng chữ restarting robot, hãy đợi vài giây để Driver Station thực hiện tác vụ.
 
@@ -123,9 +144,13 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 1.	Nối cổng USB – A từ máy tính có chứa mã code với cổng USB C phía trên Control Hub. Sau đó máy tính sẽ nhận kết nối và hiển thị dòng chữ Control Hub connected góc dưới bên phải.
 2.	Android Studio nhận thiết bị như 1 máy Android.
 3.	Để nạp code vào control hub, hãy nhấn vào nút mũi tên trên cùng của giao diện android studio
-![alt text](image-19.png)
 
-![alt text](image-20.png)
+<img src="/images/Screenshot 2025-12-06 105026.png" width="500" />
+
+
+
+<img src="/images/Screenshot 2025-12-06 105207.png" width="500" />
+
   
 4.	Sau đó hãy chờ khoảng 30 giây để code được nạp vào control hub
 ### Cách B — Dùng điện thoại Android làm Robot Controller
@@ -142,7 +167,9 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 6.  Robot sẽ chạy đúng code bạn đã nạp. 
 7.  Nếu muốn dừng toàn bộ hoạt động của Robot hãy nhấn một lần nữa vào nút hình vuông trên DS (cùng vị tri với INIT và START).  
 
-<img src = "image-17.png" width = "400">
+
+<img src="/images/Screenshot 2025-12-23 160036.png" width="500" />
+
 
 ## VII. Các subsytem và TeleOp cần thiết để thao tác trên bamboo bot của chúng tôi.
 
@@ -162,4 +189,11 @@ https://www.youtube.com/watch?v=x2Gi-i6Z2pI
 - tay cầm trái (left_stick) : điều khiển bot xoay;
 
 ## VIII. Cách điều khiển bamboo bot.
+### Sau khi bạn đã nhấn init và start hãy thực hiện các bước sau để điều khiển bamboo bot:
+- Để di chuyển, hãy gạt cần điều khiển bên phải (right_stick) lên và xuống điều điều khiển robot tiến và lùi, và gạt cần bên trái (left_stick) sang trái và phải để xoay bot.
+- Nhấn nút left_bumper để bật / tắt flywheel, và nhấn nút lên xuống (dpad up / down) để tăng / giảm tốc độ flywheel.
+- Nhấn nút right_bumper để bật / tắt intake (ăn bóng), và nhấn giữ nút right_trigger để bật chế độ nhả bóng (xoay ngược intake).
+- Khi bạn muốn đẩy bóng lên flywheel, hãy tắt intake trước (bằng cách nhấn nút right_bumper) rồi nhấn giữ nút vuông ở bên trái tay cầm để vừa bật feed bóng và vừa mở block (chặn bóng).
+
+                                   --- The end ---
 
