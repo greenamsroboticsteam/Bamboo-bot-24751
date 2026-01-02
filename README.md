@@ -12,7 +12,7 @@
 
 ### Cách 1 — Clone bằng URL (Khuyên dùng)
 1.	Mở repo:
-https://github.com/nguyendangminh-coder/DECODE---FTC-starter-robot-
+https://github.com/greenamsroboticsteam/Bamboo-bot-24751
 2.	Bấm nút Code (màu xanh lá) → Copy HTTPS URL. 
 3.	Mở Android Studio → Get from VCS.
 4.	Paste URL → Chọn thư mục lưu → Clone.
