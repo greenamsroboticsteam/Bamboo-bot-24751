@@ -3,11 +3,12 @@ package org.firstinspires.ftc.teamcode.Starter_Opmode;
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
+
+import org.firstinspires.ftc.teamcode.subsystem.Flywheel;
 @Configurable
 @TeleOp(name = "starterbot")
 public class starterbot extends OpMode {
@@ -19,15 +20,13 @@ public class starterbot extends OpMode {
 
     private DcMotorEx intake;
 
-    private DcMotorEx flywheel;
+    // Flywheel with PIDF velocity control (see subsystem/Flywheel.java).
+    private final Flywheel flywheel = new Flywheel();
 
     private ServoImplEx block;
     private ServoImplEx block2;
 
     private boolean intakeToggle = false;
-    private boolean flywheelToggle = false;
-
-    private double power = 0.5;
     @Override
     public void init() {
         prev1 = new Gamepad();
@@ -37,10 +36,7 @@ public class starterbot extends OpMode {
         intake.setDirection(DcMotorSimple.Direction.REVERSE);
         intake.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        flywheel = hardwareMap.get(DcMotorEx.class, "flywheel");
-        flywheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        flywheel.setDirection(DcMotorSimple.Direction.REVERSE);
-        flywheel.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        flywheel.init(hardwareMap, telemetry);
 
         block = hardwareMap.get(ServoImplEx.class, "leftBlock");
         block.setPosition(0);
@@ -55,6 +51,11 @@ public class starterbot extends OpMode {
         rightMotor = hardwareMap.get(DcMotorEx.class, "rightMotor");
         rightMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+    }
+
+    @Override
+    public void start() {
+        flywheel.start();
     }
 
     @Override
@@ -77,14 +78,10 @@ public class starterbot extends OpMode {
         leftMotor.setPower(leftSideOutput);
         rightMotor.setPower(rightSideOutput);
 
-        if(curr1.dpad_down && !prev1.dpad_down) {
-            power -= 0.025;
-        }
-        if(curr1.dpad_up && !prev1.dpad_up) {
-            power += 0.025;
-        }
+        // dpad up / down: change flywheel target speed by Flywheel.RPM_STEP
+        flywheel.shoot(curr1.dpad_up && !prev1.dpad_up, curr1.dpad_down && !prev1.dpad_down);
         if(curr1.left_bumper && !prev1.left_bumper) {
-            flywheelToggle = !flywheelToggle;
+            flywheel.toggle();
         }
         if (curr1.right_bumper && !prev1.right_bumper) intakeToggle = !intakeToggle;
 
@@ -98,11 +95,8 @@ public class starterbot extends OpMode {
             intake.setPower(0.7);
         } else intake.setPower(0.0);
 
-        if(!flywheelToggle) {
-            flywheel.setPower(0.0);
-        } else {
-            flywheel.setPower(power);
-        }
+        // Runs the PIDF once per loop: reads the encoder and sets the flywheel power.
+        flywheel.update();
 
         if (curr1.x) {
             block.setPosition(0.4);
@@ -112,8 +106,13 @@ public class starterbot extends OpMode {
             block2.setPosition(1.0);
         }
 
-        telemetry.addData("flywheel Position: ", flywheel.getPower());
+        flywheel.periodic();
         telemetry.addData("Servo Position: ", block.getPosition());
         telemetry.update();
+    }
+
+    @Override
+    public void stop() {
+        flywheel.stop();
     }
 }
